@@ -24,3 +24,25 @@ plt.title('Eigenfrequency vs. Radial Order for Degrees l=0, 1, and 2')
 plt.legend(title="Degree")
 plt.grid()
 plt.show()
+
+
+# Load data with relevant columns
+data2 = pd.read_csv(path+'specTCL93l03.txt', delim_whitespace=True, header=None, usecols=[0, 1, 8],
+                   names=['degree', 'radial_order', 'eigenfrequency'])
+
+# Data for degrees l = 0, 1, and 2
+filtered_data2 = data2[data2['degree'].isin([0, 1, 2])]
+
+# Plotting
+plt.figure(figsize=(10, 6))
+for degree in [0, 1, 2]:
+    subset2 = filtered_data2[filtered_data['degree'] == degree]
+    plt.plot(subset2['radial_order'], subset2['eigenfrequency'], marker='o', label=f'Degree {degree}')
+
+# Labeling and customization
+plt.xlabel('Radial Order')
+plt.ylabel('Eigenfrequency (mHz)')
+plt.title('Eigenfrequency vs. Radial Order for Degrees l=0, 1, and 2')
+plt.legend(title="Degree")
+plt.grid()
+plt.show()
