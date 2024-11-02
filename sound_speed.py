@@ -38,14 +38,13 @@ A = 100  # Arbitrary scaling factor for error bars
 file_path_a09 = 'a09/profile22.data'
 file_path_gs98 = 'gs98/profile22.data'
 
-def load_and_process_data(file_path, radial_col=2, sound_speed_col=10):
+def load_and_process_data(file_path, radial_col=9, sound_speed_col=10):
     # Read data file and load specified columns
     data = pd.read_csv(file_path, delim_whitespace=True, header=None, skiprows=5)
-    radial_position_log = pd.to_numeric(data[radial_col], errors='coerce')  # Logarithmic radial position
+    radial_position = pd.to_numeric(data[radial_col], errors='coerce')  # Logarithmic radial position
     sound_speed = pd.to_numeric(data[sound_speed_col], errors='coerce')     # Sound speed
 
     # Exponentiate radial position and remove NaNs
-    radial_position = np.exp(radial_position_log)
     mask = ~np.isnan(radial_position) & ~np.isnan(sound_speed)
     return radial_position[mask], sound_speed[mask]
 
@@ -125,7 +124,7 @@ plt.ylabel('Sound Speed (cm/s)')
 plt.title('Sound Speed Profile with Uncertainty')
 plt.grid()
 plt.legend()
-plt.tight_layout()
+
 plt.savefig('speed_of_sound_profile.png')  # Save the first plot
 plt.close()  # Close the figure
 
@@ -142,7 +141,7 @@ plt.ylabel(r'$\delta c / c$')
 plt.title('Residuals Comparison')
 plt.legend()
 plt.grid()
-plt.tight_layout()
+
 plt.savefig('residuals_comparison.png')  # Save the second plot
 plt.close()  # Close the figure
 
@@ -159,10 +158,10 @@ plt.ylim(-0.04, 0.04)  # Set y limits for this plot
 plt.xlim(0, 1)  # Set x limits for this plot
 plt.xlabel('Radial Position (r / R_sun)')
 plt.ylabel(r'$\delta c / c$')
-plt.title('Residuals Comparison for y=[−0.04, 0.04] and x=[0, 1]')
+plt.title('Residuals Comparison for y=[-0.04, 0.04] and x=[0, 1]')
 plt.legend()
 plt.grid()
-plt.tight_layout()
+
 plt.savefig('residuals_delta_range1.png')  # Save the first plot
 plt.close()
 
@@ -178,9 +177,9 @@ plt.ylim(-1, 1)  # Set y limits for this plot
 plt.xlim(0.8, 1)  # Set x limits for this plot
 plt.xlabel('Radial Position (r / R_sun)')
 plt.ylabel(r'$\delta c / c$')
-plt.title('Residuals Comparison for y=[−1, 1] and x=[0.8, 1]')
+plt.title('Residuals Comparison for y=[-1, 1] and x=[0.8, 1]')
 plt.legend()
 plt.grid()
-plt.tight_layout()
+
 plt.savefig('residuals_delta_range2.png')  # Save the second plot
 plt.close()
