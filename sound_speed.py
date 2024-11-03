@@ -115,8 +115,8 @@ residuals_a09 = (f_exp(r_vals) - f_a09(r_vals)) / f_a09(r_vals)
 
 ## First Plot: Theoretical sound speed profile with uncertainty
 plt.figure(figsize=(10, 6))
-plt.errorbar(data['r_Rsun'], data['sound_speed'], yerr=data['Sigma_c'] * A, color='blue',
-             ecolor='k', elinewidth=2, capsize=2, label='Sound Speed Profile with Uncertainty')
+plt.errorbar(data['r_Rsun'], data['sound_speed'], yerr=data['Sigma_c'] * A,
+             ecolor='k', elinewidth=2, capsize=2, label='Sound Speed Profile with Uncertainty (uncertainty x100)')
 plt.plot(radial_position_a09, sound_speed_a09, label="A09 Sound Speed", linestyle='--')
 plt.plot(radial_position_gs98, sound_speed_gs98, label="GS98 Sound Speed", linestyle='--')
 plt.xlabel('Radial Position (r / R_sun)')
