@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.fft as fft
 
 """
 The time series data has two calibrations: calib1 and calib2. 
