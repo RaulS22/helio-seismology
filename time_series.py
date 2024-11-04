@@ -16,6 +16,11 @@ time_series_1_2 = np.genfromtxt(path+'data2_calib1_pm2_960411_961010.dat')
 time_series_2_1 = np.genfromtxt(path+'data2_calib2_pm1_960411_961010.dat')
 time_series_2_2 = np.genfromtxt(path+'data2_calib2_pm2_960411_961010.dat')
 
+time_series_1_1 = time_series_1_1.flatten()
+time_series_1_2 = time_series_1_2.flatten()
+time_series_2_1 = time_series_2_1.flatten()
+time_series_2_2 = time_series_2_2.flatten()
+
 #print(time_series_1_1)
 #print(time_series_1_2)
 #print(time_series_2_1)
@@ -35,10 +40,10 @@ Concerting the time arrays to days
 since there were 183 days of data
 '''
 
-time_array_1_1 = time_array_1_1 /1080
-time_array_1_2 = time_array_1_2 /1080
-time_array_2_1 = time_array_2_1 /1080
-time_array_2_2 = time_array_2_2 /1080
+time_array_1_1 = time_array_1_1 /4320
+time_array_1_2 = time_array_1_2 /4320
+time_array_2_1 = time_array_2_1 /4320
+time_array_2_2 = time_array_2_2 /4320
 
 
 # Plot the single time series
