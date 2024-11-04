@@ -98,5 +98,5 @@ plt.tight_layout()
 # Show the plot
 #plt.show()
 
-plt.savefig('radial_frequencies_l.png')
+plt.savefig('radial_frequencies_l03.png')
 plt.close()
