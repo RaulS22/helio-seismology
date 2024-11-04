@@ -12,8 +12,8 @@ The data should be read across then down.
 path = 'Dossier_project_data_articles/'
 
 time_series_1_1 = np.genfromtxt(path+'data2_calib1_pm1_960411_961010.dat')
-time_series_1_2 = np.genfromtxt(path+'data2_calib1_pm2_960411_961010.dat')
-time_series_2_1 = np.genfromtxt(path+'data2_calib2_pm1_960411_961010.dat')
+time_series_1_2 = np.genfromtxt(path+'data2_calib2_pm1_960411_961010.dat')
+time_series_2_1 = np.genfromtxt(path+'data2_calib1_pm2_960411_961010.dat')
 time_series_2_2 = np.genfromtxt(path+'data2_calib2_pm2_960411_961010.dat')
 
 time_series_1_1 = time_series_1_1.flatten()
@@ -51,28 +51,28 @@ plt.figure(figsize=(18, 10))
 
 plt.subplot(2, 2, 1)
 plt.plot(time_array_1_1, time_series_1_1)
-plt.title('Time Series 1 Calib 1')
+plt.title('PM1 Calib 1')
 plt.xlabel('Time (days)')
 plt.ylabel('Value')
 plt.grid()
 
 plt.subplot(2, 2, 2)
 plt.plot(time_array_1_2, time_series_1_2)
-plt.title('Time Series 2 Calib 1')
+plt.title('PM1 Calib 2')
 plt.xlabel('Time (days)')
 plt.ylabel('Value')
 plt.grid()
 
 plt.subplot(2, 2, 3)
 plt.plot(time_array_2_1, time_series_2_1)
-plt.title('Time Series 1 Calib 2')
+plt.title('PM2 Calib 1')
 plt.xlabel('Time (days)')
 plt.ylabel('Value')
 plt.grid()
 
 plt.subplot(2, 2, 4)
 plt.plot(time_array_2_2, time_series_2_2)
-plt.title('Time Series 2 Calib 2')
+plt.title('PM2 Calib 2')
 plt.xlabel('Time (days)')
 plt.ylabel('Value')
 plt.grid()
