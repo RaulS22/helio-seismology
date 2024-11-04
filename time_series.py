@@ -22,6 +22,7 @@ time_series_2_2 = np.genfromtxt(path+'data2_calib2_pm2_960411_961010.dat')
 #print(time_series_2_1)
 #print(time_series_2_2)
 
+#print(len(time_series_1_1))
 
 # Generate time arrays
 time_array_1_1 = np.arange(0, len(time_series_1_1))
@@ -30,6 +31,16 @@ time_array_2_1 = np.arange(0, len(time_series_2_1))
 time_array_2_2 = np.arange(0, len(time_series_2_2))
 
 
+'''
+Concerting the time arrays to days
+since there were 183 days of data
+'''
+
+time_array_1_1 = time_array_1_1 /1080
+time_array_1_2 = time_array_1_2 /1080
+time_array_2_1 = time_array_2_1 /1080
+time_array_2_2 = time_array_2_2 /1080
+
 
 # Plot the single time series
 plt.figure(figsize=(18, 10))
@@ -37,33 +48,34 @@ plt.figure(figsize=(18, 10))
 plt.subplot(2, 2, 1)
 plt.plot(time_array_1_1, time_series_1_1)
 plt.title('Time Series 1 Calib 1')
-plt.xlabel('Time')
+plt.xlabel('Time (days)')
 plt.ylabel('Value')
 plt.grid()
 
 plt.subplot(2, 2, 2)
 plt.plot(time_array_1_2, time_series_1_2)
 plt.title('Time Series 2 Calib 1')
-plt.xlabel('Time')
+plt.xlabel('Time (days)')
 plt.ylabel('Value')
 plt.grid()
 
 plt.subplot(2, 2, 3)
 plt.plot(time_array_2_1, time_series_2_1)
 plt.title('Time Series 1 Calib 2')
-plt.xlabel('Time')
+plt.xlabel('Time (days)')
 plt.ylabel('Value')
 plt.grid()
 
 plt.subplot(2, 2, 4)
 plt.plot(time_array_2_2, time_series_2_2)
 plt.title('Time Series 2 Calib 2')
-plt.xlabel('Time')
+plt.xlabel('Time (days)')
 plt.ylabel('Value')
 plt.grid()
 
 plt.tight_layout()
 plt.savefig('Time_series.png')
 plt.close()
+
 
 
