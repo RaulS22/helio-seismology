@@ -15,10 +15,6 @@ time_series_1_2 = time_series_1_2.flatten()
 time_series_2_1 = time_series_2_1.flatten()
 time_series_2_2 = time_series_2_2.flatten()
 
-# Lorentzian Fit
-def lorentzian(f, A, f0, gamma):
-    return (A / np.pi) * (gamma / ((f - f0)**2 + gamma**2))
-
 
 # Performing the Fourier Transform
 
@@ -40,10 +36,6 @@ fft_1_1 = fft_1_1[mask]
 fft_1_2 = fft_1_2[mask]
 fft_2_1 = fft_2_1[mask]
 fft_2_2 = fft_2_2[mask]
-
-# Calculating the Lorentzian Fit
-A = 100
-
 
 
 # Plotting the Fourier Transform
