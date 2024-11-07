@@ -13,11 +13,11 @@ We also shaw compare it to our models.
 ###############
 
 # Load data with relevant columns
-data = pd.read_csv('basu_09.txt', delim_whitespace=True, comment='#', header=None,
+data_basu = pd.read_csv('basu_09.txt', delim_whitespace=True, comment='#', header=None,
                    names=['r_Rsun', 'sound_speed', 'Sigma_c'], skiprows=9)
 
 # Convert columns to numeric, coercing errors to NaN and dropping any rows with NaNs
-data = data.apply(pd.to_numeric, errors='coerce').dropna()
+data = data_basu.apply(pd.to_numeric, errors='coerce').dropna()
 
 A = 100  # Arbitrary scaling factor for error bars
 
@@ -102,7 +102,7 @@ plt.show()
 
 
 # Interpolation for the models
-f_exp = interp1d(data['r_Rsun'], data['sound_speed'], kind='cubic', fill_value='extrapolate')
+f_exp = interp1d(data_basu['r_Rsun'], data_basu['sound_speed'], kind='cubic', fill_value='extrapolate')
 f_gs98 = interp1d(radial_position_gs98, sound_speed_gs98, kind='cubic', fill_value='extrapolate')
 f_a09 = interp1d(radial_position_a09, sound_speed_a09, kind='cubic', fill_value='extrapolate')
 
