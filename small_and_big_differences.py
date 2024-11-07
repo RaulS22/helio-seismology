@@ -69,9 +69,7 @@ small_separation = np.array(small_separation) * 1e6
 std = np.std(small_separation)
 #print(std)
     
-print(f'The Small Separation is {np.mean(small_separation):.2f} +- {std:.2f} µHz')
-
-
+print(f'The Small Separation l={l} is {np.mean(small_separation):.2f} +- {std:.2f} µHz')
 
 
 
@@ -145,4 +143,5 @@ small_separation = np.array(small_separation) * 1e6
 std = np.std(small_separation)
 #print(std)
     
-print(f'The Small Separation is {np.mean(small_separation):.2f} +- {std:.2f} µHz')
+print(f'The Small Separation l={l} is {np.mean(small_separation):.2f} +- {std:.2f} µHz')
+
