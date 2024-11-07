@@ -25,7 +25,7 @@ fft_2_2 = fft.fft(time_series_2_2)
 
 # Frequency array
 N = len(time_series_1_1)
-f = np.fft.fftfreq(N)
+f = np.fft.fftfreq(N/2)
 
 
 #Only plotting the positive frequencies
