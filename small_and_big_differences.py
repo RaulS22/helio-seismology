@@ -3,41 +3,146 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import scipy.fft as fft
 
-# Load data
-path = 'Dossier_project_data_articles/'
+# Comparing the data with the frequencies obtained from GYRE
 
-time_series_2_2 = np.genfromtxt(path+'data2_calib2_pm2_960411_961010.dat') #Only the one that matters
-time_series_2_2 = time_series_2_2.flatten()
+path = 'gs98/'
+print('gs98:')
 
-# Performing the Fourier Transform
-
-fft_2_2 = fft.fft(time_series_2_2)
-
-# Frequency array
-N = len(time_series_2_2)
-f = np.fft.fftfreq(N)
-
-# Normalizing by total energy (sum of squared magnitudes)
-fft_2_2_normalized_energy = np.abs(fft_2_2) / np.sqrt(np.sum(np.abs(fft_2_2)**2))
-
-# Filter positive frequencies
-positive_frequencies = f > 0
-fft_2_2_normalized_energy_positive = fft_2_2_normalized_energy[positive_frequencies]
-f_positive = f[positive_frequencies]
+# Load data with relevant columns
+data = pd.read_csv(path+'freqs_summary.txt', delim_whitespace=True, header=None, usecols=[0, 2, 4],
+                                    names=['eigenfrequency', 'degree', 'radial_order'], skiprows=6)
 
 
-# Select frequency range between 
-freq_range_mask = (f_positive >= 0.03) & (f_positive <= 0.07)
-f_selected = f_positive[freq_range_mask]
-fft_selected = fft_2_2_normalized_energy_positive[freq_range_mask]
+
+data['eigenfrequency'] = data['eigenfrequency'] * 1e-6  # Convert to Hz
+#print(data)
+
+"""
+To calculate the large separation we need to keep l constant and vary n.
+$ \Delta\nu=\nu_{n+1,l} -\nu_{n,l} $
+
+And to calculate the small separation we need to vary both n and vary l.
+$  \delta\nu=\nu_{n,l} - \nu_{n-1, l+2} $
+"""
+
+# Large separation
+l = 0
+n = 1
+large_separation = []
+
+for n in range(n, 55):
+    
+    nu_n_l = data[(data['degree'] == l) & (data['radial_order'] == n)]['eigenfrequency'].values[0]
+    nu_nplus1_l = data[(data['degree'] == l) & (data['radial_order'] == n+1)]['eigenfrequency'].values[0]
+    large_separation.append(nu_nplus1_l - nu_n_l)
+    #print(nu_nplus1_l - nu_n_l)
+    #print(nu_n_l, nu_nplus1_l)
+
+# Convert to µHz
+large_separation = np.array(large_separation) * 1e6
+
+# errors using standard deviation
+std = np.std(large_separation)
+#print(std)
+
+# Finally, we shall take the mean of the large separations (and its respective standard deviation).
+mean_large_separation = np.mean(large_separation)
+
+print(f'The Large Separation is {mean_large_separation:.2f} +- {std:.2f} µHz')
+
+# Small separation
+l=0
+n=2
+small_separation = []
+
+for n in range(n, 55):
+    nu_n_l = data[(data['degree'] == l) & (data['radial_order'] == n)]['eigenfrequency'].values[0]
+    nu_nminus1_lplus2 = data[(data['degree'] == l+2) & (data['radial_order'] == n-1)]['eigenfrequency'].values[0]
+    #print(nu_n_l, nu_nminus1_lplus2)
+    #print(nu_n_l - nu_nminus1_lplus2)
+    small_separation.append(nu_n_l - nu_nminus1_lplus2)
+
+# Convert to µHz
+small_separation = np.array(small_separation) * 1e6
+
+# errors using standard deviation
+std = np.std(small_separation)
+#print(std)
+    
+print(f'The Small Separation is {np.mean(small_separation):.2f} +- {std:.2f} µHz')
 
 
-# Plotting the normalized Fourier Transform (with respect to energy) 
-plt.figure(figsize=(12, 6))
-plt.plot(f_selected, fft_selected)
-plt.title('Normalized Fourier Transform of PM2 Calib 2 (0.03-0.07 Hz)')
-plt.xlabel('Frequency (mHz)')
-plt.ylabel('Normalized Power')
-plt.savefig('FFT_normalized.png')
-plt.close()
 
+
+
+
+
+
+
+# Comparing the data with the frequencies obtained from GYRE
+
+path = 'a09/'
+print('a09:')
+
+# Load data with relevant columns
+data = pd.read_csv(path+'freqs_summary.txt', delim_whitespace=True, header=None, usecols=[0, 2, 4],
+                                    names=['eigenfrequency', 'degree', 'radial_order'], skiprows=6)
+
+
+
+data['eigenfrequency'] = data['eigenfrequency'] * 1e-6  # Convert to Hz
+#print(data)
+
+"""
+To calculate the large separation we need to keep l constant and vary n.
+$ \Delta\nu=\nu_{n+1,l} -\nu_{n,l} $
+
+And to calculate the small separation we need to vary both n and vary l.
+$  \delta\nu=\nu_{n,l} - \nu_{n-1, l+2} $
+"""
+
+# Large separation
+l = 0
+n = 1
+large_separation = []
+
+for n in range(n, 56):
+    
+    nu_n_l = data[(data['degree'] == l) & (data['radial_order'] == n)]['eigenfrequency'].values[0]
+    nu_nplus1_l = data[(data['degree'] == l) & (data['radial_order'] == n+1)]['eigenfrequency'].values[0]
+    large_separation.append(nu_nplus1_l - nu_n_l)
+    #print(nu_nplus1_l - nu_n_l)
+    #print(nu_n_l, nu_nplus1_l)
+
+# Convert to µHz
+large_separation = np.array(large_separation) * 1e6
+
+# errors using standard deviation
+std = np.std(large_separation)
+#print(std)
+
+# Finally, we shall take the mean of the large separations (and its respective standard deviation).
+mean_large_separation = np.mean(large_separation)
+
+print(f'The Large Separation is {mean_large_separation:.2f} +- {std:.2f} µHz')
+
+# Small separation
+l=0
+n=2
+small_separation = []
+
+for n in range(n, 56):
+    nu_n_l = data[(data['degree'] == l) & (data['radial_order'] == n)]['eigenfrequency'].values[0]
+    nu_nminus1_lplus2 = data[(data['degree'] == l+2) & (data['radial_order'] == n-1)]['eigenfrequency'].values[0]
+    #print(nu_n_l, nu_nminus1_lplus2)
+    #print(nu_n_l - nu_nminus1_lplus2)
+    small_separation.append(nu_n_l - nu_nminus1_lplus2)
+
+# Convert to µHz
+small_separation = np.array(small_separation) * 1e6
+
+# errors using standard deviation
+std = np.std(small_separation)
+#print(std)
+    
+print(f'The Small Separation is {np.mean(small_separation):.2f} +- {std:.2f} µHz')
